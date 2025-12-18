@@ -1,11 +1,16 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { LogIn, Rabbit,Shield, Bell } from "lucide-react";
+import { Rabbit,Shield, Bell } from "lucide-react";
 import AddProductForm from "@/components/AddProductForm";
 import AuthButton from "@/components/AuthButton";
-export default function Home() {
+import { createClient } from "@/utils/supabase/server";
+export default async function Home() {
 
-  const user = null;
+  const supbase = await createClient();
+
+  const {
+    data: { user},
+  } = await supbase.auth.getUser();
 
   const products = [];
 
