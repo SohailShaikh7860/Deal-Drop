@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { LogIn, Rabbit,Shield, Bell, Icon } from "lucide-react";
+import { LogIn, Rabbit,Shield, Bell } from "lucide-react";
+import AddProductForm from "@/components/AddProductForm";
 export default function Home() {
 
   const user = null;
@@ -43,7 +44,7 @@ export default function Home() {
           <Button
             variant="default"
             size="sm"
-            className="bg-orange-500 p-5 hover:bg-orange-600"
+            className="bg-orange-500 p-5 hover:bg-orange-600 cursor-pointer text-white"
           >
             <LogIn className="w-4 h-4" />
             Sign In
@@ -64,6 +65,29 @@ export default function Home() {
             Track prices across thousands of products and get instant alerts when prices drop. Save money effortlessly with Deal Drop.
           </p>
 
+          <AddProductForm user={user}/>
+
+           {products.length === 0 && (
+             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-16">
+              {FEATURES.map(({icon: Icon, title, description})=>{
+                return(
+                <div
+                key={title}
+                className="bg-white p-6 rounded-xl border border-gray-200"
+                >
+                   <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                    <Icon className="w-6 h-6 text-orange-500" />
+                   </div>
+
+                   <h3 className="font-semibold text-gray-900 mb-2">
+                    {title}
+                   </h3>
+                   <p className="text-sm text-gray-600">{description}</p>
+                </div>
+                )
+              })}
+             </div>
+           )}
         </div>
       </section>
     </main>
