@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LogIn, Rabbit,Shield, Bell } from "lucide-react";
 import AddProductForm from "@/components/AddProductForm";
+import AuthButton from "@/components/AuthButton";
 export default function Home() {
 
   const user = null;
@@ -41,14 +42,8 @@ export default function Home() {
             />
           </div>
 
-          <Button
-            variant="default"
-            size="sm"
-            className="bg-orange-500 p-5 hover:bg-orange-600 cursor-pointer text-white"
-          >
-            <LogIn className="w-4 h-4" />
-            Sign In
-          </Button>
+             {/* SignUP Button */}
+          <AuthButton user={user}/>
         </div>
       </header>
 
