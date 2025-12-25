@@ -3,7 +3,7 @@
 import { createClient } from "@/utils/supabase/server"
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { scrapeProduct } from "@/utils/scrapeProduct";
+import { scrapeProduct } from "@/lib/firecrawl";
 
 export async function signOut(){
     const supabase = await createClient();
@@ -42,7 +42,7 @@ export async function addProduct(formData){
         const currency = productData.currencyCode || 'USD';
 
         const {data:existingProduct} = await supabase
-            .from('products')
+            .from('product')
             .select('*')
             .eq('url', url)
             .eq('user_id', user.id)
@@ -91,7 +91,7 @@ export async function addProduct(formData){
             }
     } catch (error) {
          console.error("Add product error:", error);
-         return {error: error.message};
+         return {error: true, message: error.message || "Failed to add product"};
     }
 }
 
@@ -143,11 +143,4 @@ export async function getPriceHistory(productId) {
     console.error("Get price history error:", error);
     return [];
   }
-}
-
-export async function signOut() {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
-  revalidatePath("/");
-  redirect("/");
 }

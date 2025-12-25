@@ -6,11 +6,11 @@ import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 export default async function Home() {
 
-  const supbase = await createClient();
+  const supabase = await createClient();
 
   const {
     data: { user},
-  } = await supbase.auth.getUser();
+  } = await supabase.auth.getUser();
 
   const products = [];
 
