@@ -95,7 +95,7 @@ export async function addProduct(formData){
     }
 }
 
-export async function deleteProduct(formData){
+export async function deleteProduct(productId){
     try {
     const supabase = await createClient();
     const { error } = await supabase
@@ -108,7 +108,7 @@ export async function deleteProduct(formData){
     revalidatePath("/");
     return { success: true };
   } catch (error) {
-    return { error: error.message };
+    return { error: true, message: error.message || "Failed to delete product" };
   }
 }
 
