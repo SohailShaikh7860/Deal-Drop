@@ -35,7 +35,6 @@ export default function ProductCard({ product }) {
       toast.error(result.error);
    }else{
         toast.success("Product removed successfully");
-        setUrl("");
    }
    setDeleting(false);
   };
